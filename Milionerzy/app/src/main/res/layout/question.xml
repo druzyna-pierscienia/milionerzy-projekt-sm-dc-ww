@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:backgroundTint="#3F51B5">
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/milionerzyl_logo" />
+
+    <TextView
+        android:id="@+id/question_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="pytanie"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <Button
+        android:id="@+id/odpA"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="40dp"
+        android:text="A"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question_text" />
+
+    <Button
+        android:id="@+id/odpC"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="40dp"
+        android:text="C"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/odpA" />
+
+    <Button
+        android:id="@+id/odpB"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="4dp"
+        android:text="B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toEndOf="@+id/odpA"
+        app:layout_constraintTop_toBottomOf="@+id/question_text" />
+
+    <Button
+        android:id="@+id/odpD"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
+        android:text="D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toEndOf="@+id/odpC"
+        app:layout_constraintTop_toBottomOf="@+id/odpB" />
+
+    <Button
+        android:id="@+id/hint5050"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="50/50"
+        app:layout_constraintEnd_toStartOf="@+id/hintAudience"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/odpC" />
+
+    <Button
+        android:id="@+id/hintAudience"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
+        android:text="audience"
+        app:layout_constraintEnd_toStartOf="@+id/hintPhone"
+        app:layout_constraintTop_toBottomOf="@+id/odpC" />
+
+    <Button
+        android:id="@+id/hintPhone"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
+        android:text="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/odpD" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

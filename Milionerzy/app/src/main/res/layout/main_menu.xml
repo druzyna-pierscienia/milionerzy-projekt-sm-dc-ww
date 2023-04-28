@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:backgroundTint="#3F51B5">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/milionerzyl_logo" />
+
+
+    <Button
+        android:id="@+id/newGame_button"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#000000"
+        android:text="new game"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <Button
+        android:id="@+id/scoreBoard_button"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#000000"
+        android:text="score board"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newGame_button" />
+
+    <Button
+        android:id="@+id/aboutApp_button"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#000000"
+        android:text="About the app"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreBoard_button" />
+
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#000000"
+        android:text="logout"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/aboutApp_button" />
+</androidx.constraintlayout.widget.ConstraintLayout>
