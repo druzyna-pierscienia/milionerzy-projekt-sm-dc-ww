@@ -25,6 +25,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".MainButtons"></activity>
+        <activity android:name=".GameButtons"></activity>
+        <activity android:name=".Scoreboard"></activity>
+        <activity android:name=".AboutApp"></activity>
+        <activity android:name=".ending_screen"></activity>
     </application>
 
 </manifest>

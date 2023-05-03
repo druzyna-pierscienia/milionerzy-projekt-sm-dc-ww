@@ -4,133 +4,108 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GameButtons {
-    private Button odpA;
-    private Button odpB;
-    private Button odpC;
-    private Button odpD;
-    private Button hint50_50;
-    private Button hintAudience;
-    private Button hintPhone;
+public class GameButtons extends AppCompatActivity implements View.OnClickListener {
 
-    private Integer questionLvl = 1; //Do usunięcia i pobieranie z bazy
-    private Integer score = 0; //Do usunięcia i pobieranie z bazy
-    private String correctAnswer = "A"; //DO USUNIĘCIA I ZMIANY NA POBRANIE Z BAZY DANYCH
+    public Integer score = 0, questionLvl = 1;
+    public String correctAnswer = "A";
 
-    private void pobieraniePytanZBazy(int questionLvl){
-        //To powinno być osobną klasą DO POPRAWY RÓWNIEŻ W TYM KODZIE
+    private TextView question;
+    private Button answerA, answerB, answerC, answerD, hint5050, hintAudience, hintPhone, backToMenu;
+
+    protected void onCreate(Bundle saveInstanceState) {
+        super.onCreate(saveInstanceState);
+        setContentView(R.layout.question);
+
+        question = findViewById(R.id.question_text);
+        answerA = findViewById(R.id.odpA);
+        answerB = findViewById(R.id.odpB);
+        answerC = findViewById(R.id.odpC);
+        answerD = findViewById(R.id.odpD);
+        hint5050 = findViewById(R.id.hint5050);
+        hintAudience = findViewById(R.id.hintAudience);
+        hintPhone = findViewById(R.id.hintPhone);
+        backToMenu = findViewById(R.id.backToMenuButton);
+
+        question.setText("PYTANIE ASD - test");
+        answerA.setText("ODPOWIEDŹ A - test");
+        answerB.setText("ODPOWIEDŹ B - test");
+        answerC.setText("ODPOWIEDŹ C - test");
+        answerD.setText("ODPOWIEDŹ D - test");
+
+        answerA.setOnClickListener(this);
+        answerB.setOnClickListener(this);
+        answerC.setOnClickListener(this);
+        answerD.setOnClickListener(this);
+        hint5050.setOnClickListener(this);
+        hintAudience.setOnClickListener(this);
+        hintPhone.setOnClickListener(this);
+        backToMenu.setOnClickListener(this);
     }
 
-    public GameButtons(AppCompatActivity activity) {
-        odpA = new Button(activity);
-        odpB = new Button(activity);
-        odpC = new Button(activity);
-        odpD = new Button(activity);
-        hint50_50 = new Button(activity);
-        hintAudience = new Button(activity);
-        hintPhone = new Button(activity);
-
-
-        odpA.setText("odpA");
-        odpB.setText("odpB");
-        odpC.setText("odpC");
-        odpD.setText("odpD");
-        hint50_50.setText("hint50_50");
-        hintAudience.setText("hintAudience");
-        hintPhone.setText("hintPhone");
-
-        odpA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: wprowadź swój kod dla przycisku odpA
-                if(correctAnswer.equals("A")){
-                    questionLvl++;
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.odpA:
+                if (correctAnswer == "A") {
                     score = score + (questionLvl * 10);
-                    pobieraniePytanZBazy(questionLvl);
+                    questionLvl += 1;
+                    //TODO: Wywołanie gry jeszcze raz z nowymi pytaniami
+                } else {
+                    Intent intent = new Intent(GameButtons.this, AboutApp.class);
+                    intent.putExtra("score", score);
+                    startActivity(intent);
                 }
-                else {
-                    Intent intent = new Intent(v.getContext(), ending_screen.class);
-                    intent.putExtra("score", score); // przekazanie wartości 'score'
-                    v.getContext().startActivity(intent);
-                }
-            }
-        });
-
-        odpB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: wprowadź swój kod dla przycisku odpB
-                if(correctAnswer.equals("B")){
-                    questionLvl++;
+                break;
+            case R.id.odpB:
+                if (correctAnswer == "B") {
                     score = score + (questionLvl * 10);
-                    pobieraniePytanZBazy(questionLvl);
+                    questionLvl += 1;
+                    //TODO: Wywołanie gry jeszcze raz z nowymi pytaniami
+                } else {
+                    Intent intent = new Intent(GameButtons.this, ending_screen.class);
+                    intent.putExtra("score", score);
+                    startActivity(intent);
                 }
-                else {
-                    Intent intent = new Intent(v.getContext(), ending_screen.class);
-                    intent.putExtra("score", score); // przekazanie wartości 'score'
-                    v.getContext().startActivity(intent);
-                }
-            }
-        });
-
-        odpC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: wprowadź swój kod dla przycisku odpC
-                if(correctAnswer.equals("C")){
-                    questionLvl++;
+                break;
+            case R.id.odpC:
+                if (correctAnswer == "C") {
                     score = score + (questionLvl * 10);
-                    pobieraniePytanZBazy(questionLvl);
+                    questionLvl += 1;
+                    //TODO: Wywołanie gry jeszcze raz z nowymi pytaniami
+                } else {
+                    Intent intent = new Intent(GameButtons.this, ending_screen.class);
+                    intent.putExtra("score", score);
+                    startActivity(intent);
                 }
-                else {
-                    Intent intent = new Intent(v.getContext(), ending_screen.class);
-                    intent.putExtra("score", score); // przekazanie wartości 'score'
-                    v.getContext().startActivity(intent);
-                }
-            }
-        });
-
-        odpD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: wprowadź swój kod dla przycisku odpD
-                if(correctAnswer.equals("D")){
-                    questionLvl++;
+                break;
+            case R.id.odpD:
+                if (correctAnswer == "D") {
                     score = score + (questionLvl * 10);
-                    pobieraniePytanZBazy(questionLvl);
+                    questionLvl += 1;
+                    //TODO: Wywołanie gry jeszcze raz z nowymi pytaniami
+                } else {
+                    Intent intent = new Intent(GameButtons.this, ending_screen.class);
+                    intent.putExtra("score", score);
+                    startActivity(intent);
                 }
-                else {
-                    Intent intent = new Intent(v.getContext(), ending_screen.class);
-                    intent.putExtra("score", score); // przekazanie wartości 'score'
-                    v.getContext().startActivity(intent);
-                }
-            }
-        });
-
-        hint50_50.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: wprowadź swój kod dla przycisku hint50_50
-
-            }
-        });
-
-        hintAudience.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: wprowadź swój kod dla przycisku hintAudience
-
-            }
-        });
-
-        hintPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: wprowadź swój kod dla przycisku hintPhone
-
-            }
-        });
+                break;
+            case R.id.hint5050:
+                // TODO: Koło ratunkowe - 50/50
+                break;
+            case R.id.hintAudience:
+                // TODO: Koło ratunkowe - pytanie do publiczności
+                break;
+            case R.id.hintPhone:
+                // TODO: Koło ratunkowe - pytanie do przyjaciela
+                break;
+            case R.id.backToMenuButton:
+                Intent intent = new Intent(GameButtons.this, MainButtons.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.milionerzy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,16 +31,24 @@ public class MainButtons extends AppCompatActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.newGame_button:
-                setContentView(R.layout.question);
+
+                Intent intent = new Intent(MainButtons.this, GameButtons.class);
+                startActivity(intent);
                 break;
             case R.id.scoreBoard_button:
-                setContentView(R.layout.scoreboard);
+
+                Intent intent1 = new Intent(MainButtons.this, Scoreboard.class);
+                startActivity(intent1);
                 break;
             case R.id.aboutApp_button:
-                setContentView(R.layout.about_app);
+
+                Intent intent2 = new Intent(MainButtons.this, AboutApp.class);
+                startActivity(intent2);
                 break;
             case R.id.logout_button:
-                setContentView(R.layout.activity_main);
+
+                Intent intent3 = new Intent(MainButtons.this, MainActivity.class);
+                startActivity(intent3);
                 break;
         }
     }
