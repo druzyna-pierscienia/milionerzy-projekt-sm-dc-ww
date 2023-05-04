@@ -4,7 +4,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/users")
+@Path("/")
 public class UserAPI {
     @GET
     @Path("/{round_number}/question")
