@@ -44,6 +44,7 @@ public class UserAPI {
             } finally {
                 connect.close(); // Zamknięcie połączenia
             }
+            pytanie = "Hello, World!";
             return pytanie;
         }
     }
