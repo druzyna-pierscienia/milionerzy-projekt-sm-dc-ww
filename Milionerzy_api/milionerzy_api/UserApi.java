@@ -9,7 +9,7 @@ public class UserAPI {
     @GET
     @Path("/{round_number}/question")
     @Produces(MediaType.APPLICATION_JSON)
-    public User getUser(@PathParam("round_number") String round_number) {
+    public String getQuestion(@PathParam("round_number") String round_number) {
         Connect connect = new Connect();
         Connection connection = connect.getConnection();
         if (connection != null) {
