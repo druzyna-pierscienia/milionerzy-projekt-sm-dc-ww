@@ -76,28 +76,28 @@
 
     <Button
         android:id="@+id/hint5050"
-        android:layout_width="130dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:text="50/50"
         app:layout_constraintEnd_toStartOf="@+id/hintAudience"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.262"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/odpC" />
 
     <Button
         android:id="@+id/hintAudience"
-        android:layout_width="130dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="36dp"
         android:text="audience"
         app:layout_constraintEnd_toStartOf="@+id/hintPhone"
         app:layout_constraintTop_toBottomOf="@+id/odpC" />
 
     <Button
         android:id="@+id/hintPhone"
-        android:layout_width="130dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="4dp"
