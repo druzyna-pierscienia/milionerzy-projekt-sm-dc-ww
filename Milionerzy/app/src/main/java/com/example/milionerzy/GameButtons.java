@@ -34,6 +34,15 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
 
     private ArrayList<Button> answerButtons = new ArrayList<>();
 
+    private void correct_function(){
+        score = score + (questionLvl * 10);
+        questionLvl += 1;
+
+        Intent intent = new Intent(GameButtons.this, GameButtons.class);
+        intent.putExtra("questionLvl", questionLvl);
+        intent.putExtra("score", score);
+        startActivity(intent);
+    }
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.question);
@@ -90,13 +99,8 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                     public void run() {
                         if (correctAnswer == "A") {
                             answerA.setBackgroundColor(getResources().getColor(R.color.green));
-                            score = score + (questionLvl * 10);
-                            questionLvl += 1;
+                            correct_function();
 
-                            Intent intent = new Intent(GameButtons.this, GameButtons.class);
-                            intent.putExtra("questionLvl", questionLvl);
-                            intent.putExtra("score", score);
-                            startActivity(intent);
 
                             //TODO: Dodać warunek końca gry
                         } else {
@@ -133,13 +137,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                     public void run() {
                         if (correctAnswer == "B") {
                             answerB.setBackgroundColor(getResources().getColor(R.color.green));
-                            score = score + (questionLvl * 10);
-                            questionLvl += 1;
-
-                            Intent intent = new Intent(GameButtons.this, GameButtons.class);
-                            intent.putExtra("questionLvl", questionLvl);
-                            intent.putExtra("score", score);
-                            startActivity(intent);
+                            correct_function();
 
                             //TODO: Dodać warunek końca gry
                         } else {
@@ -175,13 +173,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                     public void run() {
                         if (correctAnswer == "C") {
                             answerC.setBackgroundColor(getResources().getColor(R.color.green));
-                            score = score + (questionLvl * 10);
-                            questionLvl += 1;
-
-                            Intent intent = new Intent(GameButtons.this, GameButtons.class);
-                            intent.putExtra("questionLvl", questionLvl);
-                            intent.putExtra("score", score);
-                            startActivity(intent);
+                            correct_function();
 
                             //TODO: Dodać warunek końca gry
                         } else {
@@ -217,13 +209,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                     public void run() {
                         if (correctAnswer == "D") {
                             answerD.setBackgroundColor(getResources().getColor(R.color.green));
-                            score = score + (questionLvl * 10);
-                            questionLvl += 1;
-
-                            Intent intent = new Intent(GameButtons.this, GameButtons.class);
-                            intent.putExtra("questionLvl", questionLvl);
-                            intent.putExtra("score", score);
-                            startActivity(intent);
+                            correct_function();
 
                             //TODO: Dodać warunek końca gry
                         } else {
@@ -257,7 +243,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
 
                 // Disable 2 incorrect answers
                 disableTwoIncorrectAnswers();
-// Disable 50/50 hint button after it's used
+                // Disable 50/50 hint button after it's used
                 hint5050.setEnabled(false);
 
                 break;
