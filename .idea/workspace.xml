@@ -5,30 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50eb481f-4b32-4c9d-a5a5-108a6f65182f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/proguard-rules.pro" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/proguard-rules.pro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/androidTest/java/com/example/milionerzy/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/androidTest/java/com/example/milionerzy/ExampleInstrumentedTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/java/com/example/milionerzy/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/java/com/example/milionerzy/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/drawable/ic_launcher_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/layout/main_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/layout/main_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/values-night/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/values/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/xml/backup_rules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/xml/backup_rules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/res/xml/data_extraction_rules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/res/xml/data_extraction_rules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/test/java/com/example/milionerzy/ExampleUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/test/java/com/example/milionerzy/ExampleUnitTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Milionerzy/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,20 +15,23 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2PEdqUPxLQaD5exxNkVgXL8Pjpd" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/Staszek/Documents/milionerzy/milionerzy-projekt-sm-dc-ww/Milionerzy"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Staszek/Documents/milionerzy/milionerzy-projekt-sm-dc-ww/Milionerzy&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
