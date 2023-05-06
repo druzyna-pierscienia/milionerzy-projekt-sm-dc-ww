@@ -48,6 +48,7 @@ public class MainButtons extends AppCompatActivity implements View.OnClickListen
             case R.id.logout_button:
 
                 Intent intent3 = new Intent(MainButtons.this, MainActivity.class);
+                intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent3);
                 break;
         }
