@@ -90,7 +90,7 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:text="audience"
         app:layout_constraintEnd_toStartOf="@+id/hintPhone"
         app:layout_constraintTop_toBottomOf="@+id/odpC" />
@@ -100,10 +100,18 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="4dp"
         android:text="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/odpD" />
+
+    <Button
+        android:id="@+id/backToMenuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="2dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
