@@ -6,19 +6,33 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class GameButtons extends AppCompatActivity implements View.OnClickListener {
 
     public Integer score = 0, questionLvl = 1;
+
+
+    private static final int ANSWERS_NUMBER = 4;
+    private static final int HALF_ANSWERS_NUMBER = ANSWERS_NUMBER / 2;
+
+
     //TODO: Cała poniższa linijka do zmiany na pobieranie z bazy
     public String correctAnswer = "A", questionFromDataBase = "Pytanie z bazy pytań", answerAFromDataBase = "Odpowiedź A", answerBFromDataBase = "Odpowiedź B", answerCFromDataBase = "Odpowiedź C", answerDFromDataBase = "Odpowiedź D";
 
     private TextView question;
     private Button answerA, answerB, answerC, answerD, hint5050, hintAudience, hintPhone, backToMenu;
 
-
+    private ArrayList<Button> answerButtons = new ArrayList<>();
 
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -43,6 +57,13 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         answerB.setText(answerBFromDataBase);
         answerC.setText(answerCFromDataBase);
         answerD.setText(answerDFromDataBase);
+
+
+
+        answerButtons.add(answerA);
+        answerButtons.add(answerB);
+        answerButtons.add(answerC);
+        answerButtons.add(answerD);
 
         answerA.setOnClickListener(this);
         answerB.setOnClickListener(this);
@@ -233,12 +254,25 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.hint5050:
                 // TODO: Koło ratunkowe - 50/50
+
+                // Disable 2 incorrect answers
+                disableTwoIncorrectAnswers();
+// Disable 50/50 hint button after it's used
+                hint5050.setEnabled(false);
+
                 break;
             case R.id.hintAudience:
                 // TODO: Koło ratunkowe - pytanie do publiczności
+
+                showAudienceDialog();
+
                 break;
             case R.id.hintPhone:
                 // TODO: Koło ratunkowe - pytanie do przyjaciela
+
+                usePhoneAFriend();
+
+
                 break;
             case R.id.backToMenuButton:
                 Intent intent = new Intent(GameButtons.this, MainButtons.class);
@@ -246,4 +280,78 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                 break;
         }
     }
+
+    private void disableTwoIncorrectAnswers() {
+        ArrayList<Integer> incorrectIndexes = new ArrayList<>();
+        int correctIndex = -1;
+        for (int i = 0; i < ANSWERS_NUMBER; i++) {
+            Button button = answerButtons.get(i);
+            if (correctAnswer.equals(button.getTag())) {
+                correctIndex = i;
+            } else {
+                incorrectIndexes.add(i);
+            }
+        }
+
+        Collections.shuffle(incorrectIndexes);
+        int disabledCount = 0;
+        for (int i = 0; i < incorrectIndexes.size(); i++) {
+            if (disabledCount >= HALF_ANSWERS_NUMBER) {
+                break;
+            }
+            int index = incorrectIndexes.get(i);
+            Button button = answerButtons.get(index);
+            if (button.isEnabled()) {
+                button.setEnabled(false);
+                disabledCount++;
+            }
+        }
+        hint5050.setVisibility(View.INVISIBLE);
+    }
+    private void showAudienceDialog() {
+        // Wylosuj procentowe szanse odpowiedzi
+
+
+        int chanceA = new Random().nextInt(41) + 50; // szansa na odpowiedź A to 50-90%
+        int chanceB = new Random().nextInt(100 - chanceA) + 1; // szansa na odpowiedź B to 1-80%
+        int chanceC = new Random().nextInt(100 - chanceA - chanceB) + 1; // szansa na odpowiedź C to 1-70%
+        int chanceD = 100 - chanceA - chanceB - chanceC; // szansa na odpowiedź D to reszta
+
+        // Wyświetl okno dialogowe z wynikami
+        String message = "Pytanie do publiczności:\nA: " + chanceA + "%\nB: " + chanceB + "%\nC: " + chanceC + "%\nD: " + chanceD + "%";
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
+
+        hintAudience.setVisibility(View.INVISIBLE);
+    }
+
+    private void usePhoneAFriend() {
+
+    // Wylosuj procentową szansę na poprawną odpowiedź przy użyciu "telefonu do przyjaciela"
+        boolean isAnswerCorrect = new Random().nextInt(100) < 75;
+
+    // Wyświetl odpowiedni komunikat w zależności od wyniku losowania
+        String message;
+        if (isAnswerCorrect) {
+            message = "Twoj przyjaciel pomógl Ci, poprawna odpowiedź to: " + correctAnswer;
+        } else {
+            message = "Twoj przyjaciel nie jest pewny odpowiedzi, trudno powiedzieć...";
+        }
+
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
+
+        hintPhone.setVisibility(View.INVISIBLE);
+    }
+
+
+
+
+
+
+
 }
