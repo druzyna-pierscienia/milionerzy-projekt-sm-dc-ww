@@ -21,15 +21,22 @@ import java.util.concurrent.ExecutionException;
 
 public class GameButtons extends AppCompatActivity implements View.OnClickListener {
 
-    public Integer score = 0, questionLvl = 1;
+    public Integer score=0, questionLvl=1;
     private static final int ANSWERS_NUMBER = 4;
     private static final int HALF_ANSWERS_NUMBER = ANSWERS_NUMBER / 2;
 
 
     //TODO: Cała poniższa linijka do zmiany na pobieranie z bazy
-    public String correctAnswer = "A", questionFromDataBase = "Pytanie", answerAFromDataBase = "Odpowiedź A", answerBFromDataBase = "Odpowiedź B", answerCFromDataBase = "Odpowiedź C", answerDFromDataBase = "Odpowiedź D";
+    public String correctAnswer, questionFromDataBase, answerAFromDataBase, answerBFromDataBase, answerCFromDataBase, answerDFromDataBase;
     private TextView question;
-    private Button answerA, answerB, answerC, answerD, hint5050, hintAudience, hintPhone, backToMenu;
+    private Button answerA;
+    private Button answerB;
+    private Button answerC;
+    private Button answerD;
+    private Button hint5050;
+    private Button hintAudience;
+    private Button hintPhone;
+    private Button backToMenu;
     private ArrayList<Button> answerButtons = new ArrayList<>();
     public GameButtons() throws IOException {
     }
@@ -48,23 +55,34 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         super.onCreate(saveInstanceState);
         setContentView(R.layout.question);
 
+
+        Intent intent = getIntent();
+        questionLvl = intent.getIntExtra("questionLvl", 1); // pobranie przekazanej wartości 'questionLvl'
+        score = intent.getIntExtra("score", 0); // pobranie przekazanej wartości 'score'
+
+
         // Pobieranie 'response' z bazy
         DataBaseQuestion task = new DataBaseQuestion();
         try {
-            String result = task.execute("http://10.0.2.2:8080/question?roundNumber=1").get();
-            questionFromDataBase = result;
+            String result = task.execute("http://10.0.2.2:8080/question?roundNumber="+String.valueOf(questionLvl)).get();
+            if (result.equals("blad")){
+                result = task.execute("http://10.0.2.2:8080/question?roundNumber="+String.valueOf(questionLvl)).get();
+            }
+            else {
+                String[] quest = result.split("/");
+                questionFromDataBase = quest[0] + " " + quest[5];
+                answerAFromDataBase = quest[1];
+                answerBFromDataBase = quest[2];
+                answerCFromDataBase = quest[3];
+                answerDFromDataBase = quest[4];
+                correctAnswer = quest[5];
+            }
+
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-
-
-
-        Intent intent = getIntent();
-        questionLvl = intent.getIntExtra("questionLvl", 1); // pobranie przekazanej wartości 'questionLvl'
-        score = intent.getIntExtra("score", 0); // pobranie przekazanej wartości 'score'
 
         question = findViewById(R.id.question_text);
         answerA = findViewById(R.id.odpA);
@@ -112,7 +130,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
-                        if (correctAnswer == "A") {
+                        if (correctAnswer.equals("a")) {
                             answerA.setBackgroundColor(getResources().getColor(R.color.green));
                             correct_function();
 
@@ -123,22 +141,28 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
                             intent.putExtra("score", score);
                             intent.putExtra("question", questionFromDataBase);
-                            if(correctAnswer == "A") {
+                            if(correctAnswer.equals("a")) {
                                 String correctAnswerAway = answerAFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else if(correctAnswer == "B") {
+                            else if(correctAnswer.equals("b")){
                                 String correctAnswerAway = answerBFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else if(correctAnswer == "C") {
+                            else if(correctAnswer.equals("c")) {
                                 String correctAnswerAway = answerCFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else {
+                            else if(correctAnswer.equals("d")){
                                 String correctAnswerAway = answerDFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
+                            else {
+                                String correctAnswerAway = "BŁAD";
+                                intent.putExtra("correctAnswer", correctAnswerAway);
+                            }
+                            startActivity(intent);
+
 
                             startActivity(intent);
                         }
@@ -150,7 +174,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                 Handler handler1 = new Handler();
                 handler1.postDelayed(new Runnable() {
                     public void run() {
-                        if (correctAnswer == "B") {
+                        if (correctAnswer.equals("b")) {
                             answerB.setBackgroundColor(getResources().getColor(R.color.green));
                             correct_function();
 
@@ -160,20 +184,24 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
                             intent.putExtra("score", score);
                             intent.putExtra("question", questionFromDataBase);
-                            if(correctAnswer == "A") {
+                            if(correctAnswer.equals("a")) {
                                 String correctAnswerAway = answerAFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else if(correctAnswer == "B") {
+                            else if(correctAnswer.equals("b")){
                                 String correctAnswerAway = answerBFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else if(correctAnswer == "C") {
+                            else if(correctAnswer.equals("c")) {
                                 String correctAnswerAway = answerCFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else {
+                            else if(correctAnswer.equals("d")){
                                 String correctAnswerAway = answerDFromDataBase;
+                                intent.putExtra("correctAnswer", correctAnswerAway);
+                            }
+                            else {
+                                String correctAnswerAway = "BŁAD";
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
                             startActivity(intent);
@@ -186,7 +214,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                 Handler handler2 = new Handler();
                 handler2.postDelayed(new Runnable() {
                     public void run() {
-                        if (correctAnswer == "C") {
+                        if (correctAnswer.equals("c")) {
                             answerC.setBackgroundColor(getResources().getColor(R.color.green));
                             correct_function();
 
@@ -196,20 +224,24 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
                             intent.putExtra("score", score);
                             intent.putExtra("question", questionFromDataBase);
-                            if(correctAnswer == "A") {
+                            if(correctAnswer.equals("a")) {
                                 String correctAnswerAway = answerAFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else if(correctAnswer == "B") {
+                            else if(correctAnswer.equals("b")){
                                 String correctAnswerAway = answerBFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else if(correctAnswer == "C") {
+                            else if(correctAnswer.equals("c")) {
                                 String correctAnswerAway = answerCFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else {
+                            else if(correctAnswer.equals("d")){
                                 String correctAnswerAway = answerDFromDataBase;
+                                intent.putExtra("correctAnswer", correctAnswerAway);
+                            }
+                            else {
+                                String correctAnswerAway = "BŁAD";
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
                             startActivity(intent);
@@ -222,7 +254,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                 Handler handler3 = new Handler();
                 handler3.postDelayed(new Runnable() {
                     public void run() {
-                        if (correctAnswer == "D") {
+                        if (correctAnswer.equals("d")) {
                             answerD.setBackgroundColor(getResources().getColor(R.color.green));
                             correct_function();
 
@@ -232,20 +264,24 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
                             intent.putExtra("score", score);
                             intent.putExtra("question", questionFromDataBase);
-                            if(correctAnswer == "A") {
+                            if(correctAnswer.equals("a")) {
                                 String correctAnswerAway = answerAFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else if(correctAnswer == "B") {
+                            else if(correctAnswer.equals("b")){
                                 String correctAnswerAway = answerBFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else if(correctAnswer == "C") {
+                            else if(correctAnswer.equals("c")) {
                                 String correctAnswerAway = answerCFromDataBase;
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
-                            else {
+                            else if(correctAnswer.equals("d")){
                                 String correctAnswerAway = answerDFromDataBase;
+                                intent.putExtra("correctAnswer", correctAnswerAway);
+                            }
+                            else {
+                                String correctAnswerAway = "BŁAD";
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
                             startActivity(intent);

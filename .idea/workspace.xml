@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="50eb481f-4b32-4c9d-a5a5-108a6f65182f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/java/com/example/milionerzy/DataBaseQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/java/com/example/milionerzy/DataBaseQuestion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy/app/src/main/java/com/example/milionerzy/GameButtons.java" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy/app/src/main/java/com/example/milionerzy/GameButtons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Milionerzy_api/milionerzy_api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Milionerzy_api/milionerzy_api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-    </list>
+    <list default="true" id="50eb481f-4b32-4c9d-a5a5-108a6f65182f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
