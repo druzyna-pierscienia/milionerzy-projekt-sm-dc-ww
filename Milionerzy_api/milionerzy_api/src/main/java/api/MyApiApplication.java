@@ -62,4 +62,40 @@ public class MyApiApplication {
         }
         return pytanie;
     }
+
+    @GetMapping("/ranking")
+    public String getRanking(){
+        String ranking = "404";
+        Connect connect = new Connect();
+        Connection connection = connect.getConnection();
+        if (connection != null) {
+            try {
+                // Tworzenie zapytania SQL
+                String query = "SELECT tabilca_wynikow.wynik, uzytkownicy.login FROM milionerzy.tabilca_wynikow INNER JOIN milionerzy.uzytkownicy ON tabilca_wynikow.uzytkownik=uzytkownicy.id_uzytkownika ORDER BY wynik LIMIT 10";
+
+                // Wykonanie zapytania
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+
+                // Przetwarzanie wyników zapytania
+                ranking = "";
+                while(resultSet.next()){
+                    // Pobieranie wartości z kolumn w wyniku zapytania
+                    ranking += resultSet.getString("login");
+                    ranking += "/"+resultSet.getString("wynik")+";";
+                }
+                // Zamknięcie obiektów ResultSet i Statement
+                resultSet.close();
+                statement.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                connect.close(); // Zamknięcie połączenia
+            }
+
+        }
+        return ranking;
+    }
+
 }
