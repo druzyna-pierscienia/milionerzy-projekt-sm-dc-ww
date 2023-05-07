@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Random;
 
 @SpringBootApplication
@@ -96,6 +93,48 @@ public class MyApiApplication {
 
         }
         return ranking;
+    }
+
+    @GetMapping("/login")
+    public boolean checkLogin(@RequestParam(name = "login") String login, @RequestParam(name = "password") String password){
+        boolean logSucces = false;
+        int count = 0;
+        Connect connect = new Connect();
+        Connection connection = connect.getConnection();
+        if (connection != null) {
+            try {
+                // Tworzenie zapytania SQL
+                String query = "SELECT id_uzytkownika FROM milionerzy.uzytkownicy WHERE login = ? AND haslo = ?";
+
+                PreparedStatement statement = connection.prepareStatement(query);
+
+                // Ustawienie wartości parametrów
+                statement.setString(1, login);
+                statement.setString(2, password);
+
+                // Wykonanie zapytania
+                ResultSet resultSet = statement.executeQuery();
+
+
+                // Przetwarzanie wyników zapytania
+                while(resultSet.next()){
+                    count++;
+                }
+                if(count>0){
+                    logSucces=true;
+                }
+                // Zamknięcie obiektów ResultSet i Statement
+                resultSet.close();
+                statement.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                connect.close(); // Zamknięcie połączenia
+            }
+
+        }
+        return logSucces;
     }
 
 }
