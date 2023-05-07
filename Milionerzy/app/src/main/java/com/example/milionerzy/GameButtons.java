@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -22,17 +23,23 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
     public Integer score = 0, questionLvl = 1;
 
 
+    //TODO: Pobieranie 'response' z bazy
+
+
     private static final int ANSWERS_NUMBER = 4;
     private static final int HALF_ANSWERS_NUMBER = ANSWERS_NUMBER / 2;
 
 
     //TODO: Cała poniższa linijka do zmiany na pobieranie z bazy
-    public String correctAnswer = "A", questionFromDataBase = "Pytanie z bazy pytań", answerAFromDataBase = "Odpowiedź A", answerBFromDataBase = "Odpowiedź B", answerCFromDataBase = "Odpowiedź C", answerDFromDataBase = "Odpowiedź D";
+    public String correctAnswer = "A", questionFromDataBase = response, answerAFromDataBase = "Odpowiedź A", answerBFromDataBase = "Odpowiedź B", answerCFromDataBase = "Odpowiedź C", answerDFromDataBase = "Odpowiedź D";
 
     private TextView question;
     private Button answerA, answerB, answerC, answerD, hint5050, hintAudience, hintPhone, backToMenu;
 
     private ArrayList<Button> answerButtons = new ArrayList<>();
+
+    public GameButtons() throws IOException {
+    }
 
     private void correct_function(){
         score = score + (questionLvl * 10);
