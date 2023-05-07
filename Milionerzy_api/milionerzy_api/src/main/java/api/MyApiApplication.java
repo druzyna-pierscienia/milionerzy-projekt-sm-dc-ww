@@ -4,6 +4,7 @@ import connection.Connect;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -137,4 +138,70 @@ public class MyApiApplication {
         return logSucces;
     }
 
+    @PostMapping("/register")
+    public int addUser(@RequestParam(name = "login") String login, @RequestParam(name = "password") String password, @RequestParam(name = "mail") String mail) {
+        int success = 0;
+        int count = 0;
+        Connect connect = new Connect();
+        Connection connection = connect.getConnection();
+        if (connection != null) {
+            try {
+                connection.setAutoCommit(false); // włączenie ręcznego zarządzania transakcjami
+
+                // Tworzenie zapytania SQL
+                String query = "SELECT id_uzytkownika FROM milionerzy.uzytkownicy WHERE login = ?";
+
+                PreparedStatement statement = connection.prepareStatement(query);
+
+                // Ustawienie wartości parametrów
+                statement.setString(1, login);
+
+                // Wykonanie zapytania
+                ResultSet resultSet = statement.executeQuery();
+
+
+                // Przetwarzanie wyników zapytania
+                while(resultSet.next()){
+                    count++;
+                }
+                if(count!=0){
+                    success=69;
+                }else {
+
+                    // Utworzenie zapytania SQL
+                    query = "INSERT INTO milionerzy.uzytkownicy (login, haslo, mail) VALUES (?, ?, ?)";
+
+                    // Przygotowanie instrukcji SQL z parametrami
+                    PreparedStatement statement2 = connection.prepareStatement(query);
+                    statement2.setString(1, login);
+                    statement2.setString(2, password);
+                    statement2.setString(3, mail);
+
+                    // Wykonanie instrukcji SQL
+                    int rowsAffected = statement2.executeUpdate();
+
+                    if (rowsAffected == 1) { // Jeżeli wstawiono dokładnie jeden wiersz
+                        success = 420;
+                        connection.commit(); // zatwierdzenie tranzakcji
+                    } else {
+                        connection.rollback(); // wycofanie tranzakcji
+                    }
+
+                    // Zamknięcie obiektów Statement i Connection
+                    statement.close();
+                    statement2.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                try {
+                    connection.rollback(); // wycofanie tranzakcji w przypadku błędu SQL
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            } finally {
+                connect.close(); // zamknięcie połączenia z bazą danych
+            }
+        }
+        return success;
+    }
 }
