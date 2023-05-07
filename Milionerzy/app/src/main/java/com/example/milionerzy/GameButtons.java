@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,7 @@ import java.util.Random;
 
 public class GameButtons extends AppCompatActivity implements View.OnClickListener {
 
-    public Integer score = 0, questionLvl = 1;
+    public Integer score = 0, questionLvl = 1, hint5050Use = 0, hintAudienceUse = 0, hintPhoneUse = 0;
 
 
     private static final int ANSWERS_NUMBER = 4;
@@ -30,7 +31,8 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
     public String correctAnswer = "A", questionFromDataBase = "Pytanie z bazy pytań", answerAFromDataBase = "Odpowiedź A", answerBFromDataBase = "Odpowiedź B", answerCFromDataBase = "Odpowiedź C", answerDFromDataBase = "Odpowiedź D";
 
     private TextView question;
-    private Button answerA, answerB, answerC, answerD, hint5050, hintAudience, hintPhone, backToMenu;
+    private Button answerA, answerB, answerC, answerD, hint5050,  backToMenu;
+    private ImageButton hintAudience, hintPhone;
 
     private ArrayList<Button> answerButtons = new ArrayList<>();
 
@@ -41,6 +43,9 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         Intent intent = getIntent();
         questionLvl = intent.getIntExtra("questionLvl", 1); // pobranie przekazanej wartości 'questionLvl'
         score = intent.getIntExtra("score", 0); // pobranie przekazanej wartości 'score'
+        hint5050Use = intent.getIntExtra("hint5050Use",0);
+        hintAudienceUse = intent.getIntExtra("hintAudienceUse", 0);
+        hintPhoneUse = intent.getIntExtra("hintPhoneUse", 0);
 
         question = findViewById(R.id.question_text);
         answerA = findViewById(R.id.odpA);
@@ -74,6 +79,16 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         hintPhone.setOnClickListener(this);
         backToMenu.setOnClickListener(this);
 
+        if(hint5050Use != 0){
+            hint5050.setVisibility(View.INVISIBLE);
+        }
+        if(hintAudienceUse != 0){
+            hintAudience.setVisibility(View.INVISIBLE);
+        }
+        if(hintPhoneUse != 0){
+            hintPhone.setVisibility(View.INVISIBLE);
+        }
+
 
     }
 
@@ -93,9 +108,14 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                             score = score + (questionLvl * 10);
                             questionLvl += 1;
 
+
+
                             Intent intent = new Intent(GameButtons.this, GameButtons.class);
                             intent.putExtra("questionLvl", questionLvl);
                             intent.putExtra("score", score);
+                            intent.putExtra("hint5050Use",hint5050Use);
+                            intent.putExtra("hintAudienceUse",hintAudienceUse);
+                            intent.putExtra("hintPhoneUse",hintPhoneUse);
                             startActivity(intent);
 
                             //TODO: Dodać warunek końca gry
@@ -139,6 +159,9 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                             Intent intent = new Intent(GameButtons.this, GameButtons.class);
                             intent.putExtra("questionLvl", questionLvl);
                             intent.putExtra("score", score);
+                            intent.putExtra("hint5050Use",hint5050Use);
+                            intent.putExtra("hintAudienceUse",hintAudienceUse);
+                            intent.putExtra("hintPhoneUse",hintPhoneUse);
                             startActivity(intent);
 
                             //TODO: Dodać warunek końca gry
@@ -181,6 +204,9 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                             Intent intent = new Intent(GameButtons.this, GameButtons.class);
                             intent.putExtra("questionLvl", questionLvl);
                             intent.putExtra("score", score);
+                            intent.putExtra("hint5050Use",hint5050Use);
+                            intent.putExtra("hintAudienceUse",hintAudienceUse);
+                            intent.putExtra("hintPhoneUse",hintPhoneUse);
                             startActivity(intent);
 
                             //TODO: Dodać warunek końca gry
@@ -223,6 +249,9 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                             Intent intent = new Intent(GameButtons.this, GameButtons.class);
                             intent.putExtra("questionLvl", questionLvl);
                             intent.putExtra("score", score);
+                            intent.putExtra("hint5050Use",hint5050Use);
+                            intent.putExtra("hintAudienceUse",hintAudienceUse);
+                            intent.putExtra("hintPhoneUse",hintPhoneUse);
                             startActivity(intent);
 
                             //TODO: Dodać warunek końca gry
@@ -258,20 +287,21 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                 // Disable 2 incorrect answers
                 disableTwoIncorrectAnswers();
 // Disable 50/50 hint button after it's used
-                hint5050.setEnabled(false);
+                hint5050Use += 1;
 
                 break;
             case R.id.hintAudience:
                 // TODO: Koło ratunkowe - pytanie do publiczności
 
                 showAudienceDialog();
+                hintAudienceUse += 1;
 
                 break;
             case R.id.hintPhone:
                 // TODO: Koło ratunkowe - pytanie do przyjaciela
 
                 usePhoneAFriend();
-
+                hintPhoneUse += 1;
 
                 break;
             case R.id.backToMenuButton:
@@ -318,11 +348,33 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         int chanceD = 100 - chanceA - chanceB - chanceC; // szansa na odpowiedź D to reszta
 
         // Wyświetl okno dialogowe z wynikami
-        String message = "Pytanie do publiczności:\nA: " + chanceA + "%\nB: " + chanceB + "%\nC: " + chanceC + "%\nD: " + chanceD + "%";
-        new AlertDialog.Builder(this)
-                .setMessage(message)
-                .setPositiveButton("OK", null)
-                .show();
+        if(correctAnswer == "A"){
+            String message = "Pytanie do publiczności:\nA: " + chanceA + "%\nB: " + chanceB + "%\nC: " + chanceC + "%\nD: " + chanceD + "%";
+            new AlertDialog.Builder(this)
+                    .setMessage(message)
+                    .setPositiveButton("OK", null)
+                    .show();
+        } else if(correctAnswer == "B"){
+            String message = "Pytanie do publiczności:\nA: " + chanceB + "%\nB: " + chanceA + "%\nC: " + chanceC + "%\nD: " + chanceD + "%";
+            new AlertDialog.Builder(this)
+                    .setMessage(message)
+                    .setPositiveButton("OK", null)
+                    .show();
+        } else if(correctAnswer == "C"){
+            String message = "Pytanie do publiczności:\nA: " + chanceC + "%\nB: " + chanceB + "%\nC: " + chanceA + "%\nD: " + chanceD + "%";
+            new AlertDialog.Builder(this)
+                    .setMessage(message)
+                    .setPositiveButton("OK", null)
+                    .show();
+        } else{
+            String message = "Pytanie do publiczności:\nA: " + chanceD + "%\nB: " + chanceB + "%\nC: " + chanceC + "%\nD: " + chanceA + "%";
+            new AlertDialog.Builder(this)
+                    .setMessage(message)
+                    .setPositiveButton("OK", null)
+                    .show();
+        }
+
+
 
         hintAudience.setVisibility(View.INVISIBLE);
     }

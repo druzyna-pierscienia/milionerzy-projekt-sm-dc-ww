@@ -35,7 +35,7 @@
         android:id="@+id/odpA"
         android:layout_width="150dp"
         android:layout_height="80dp"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:tag="A"
         android:text="A"
@@ -46,7 +46,7 @@
         android:id="@+id/odpC"
         android:layout_width="150dp"
         android:layout_height="80dp"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:tag="C"
         android:text="C"
@@ -78,44 +78,53 @@
         app:layout_constraintStart_toEndOf="@+id/odpC"
         app:layout_constraintTop_toBottomOf="@+id/odpB" />
 
+
     <Button
         android:id="@+id/hint5050"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_width="110dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
         android:text="50/50"
         app:layout_constraintEnd_toStartOf="@+id/hintAudience"
-        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/odpC" />
-
-    <Button
-        android:id="@+id/hintAudience"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="8dp"
-        android:text="audience"
-        app:layout_constraintEnd_toStartOf="@+id/hintPhone"
-        app:layout_constraintTop_toBottomOf="@+id/odpC" />
-
-    <Button
-        android:id="@+id/hintPhone"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="4dp"
-        android:text="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/odpD" />
 
     <Button
         android:id="@+id/backToMenuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Menu"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="2dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/hintPhone"
+        android:layout_width="110dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#6200ED"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/hintAudience"
+        app:layout_constraintTop_toBottomOf="@+id/odpD"
+        app:srcCompat="@drawable/phone_call_18" />
+
+    <ImageButton
+        android:id="@+id/hintAudience"
+        android:layout_width="110dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#6200ED"
+        app:layout_constraintEnd_toStartOf="@+id/hintPhone"
+        app:layout_constraintStart_toEndOf="@+id/hint5050"
+        app:layout_constraintTop_toBottomOf="@+id/odpC"
+        app:srcCompat="@drawable/users_alt_18" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
