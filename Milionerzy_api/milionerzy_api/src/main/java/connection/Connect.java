@@ -1,5 +1,9 @@
 package connection;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class Connect {
 
     private String driver = "org.postgresql.Driver";
@@ -14,7 +18,7 @@ public class Connect {
     private String url = "jdbc:postgresql://" + host+":"+port + "/" + dbname; private String pass = "35192";
     private Connection connection;
 
-    public Connect () {
+    public Connect() {
         connection = makeConnection(); }
 
     public Connection getConnection(){
