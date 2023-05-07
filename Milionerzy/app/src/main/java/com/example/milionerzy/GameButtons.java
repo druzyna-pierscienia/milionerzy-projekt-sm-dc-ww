@@ -17,27 +17,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class GameButtons extends AppCompatActivity implements View.OnClickListener {
 
     public Integer score = 0, questionLvl = 1;
-
-
-    //TODO: Pobieranie 'response' z bazy
-
-
     private static final int ANSWERS_NUMBER = 4;
     private static final int HALF_ANSWERS_NUMBER = ANSWERS_NUMBER / 2;
 
 
     //TODO: Cała poniższa linijka do zmiany na pobieranie z bazy
-    public String correctAnswer = "A", questionFromDataBase = response, answerAFromDataBase = "Odpowiedź A", answerBFromDataBase = "Odpowiedź B", answerCFromDataBase = "Odpowiedź C", answerDFromDataBase = "Odpowiedź D";
-
+    public String correctAnswer = "A", questionFromDataBase = "Pytanie", answerAFromDataBase = "Odpowiedź A", answerBFromDataBase = "Odpowiedź B", answerCFromDataBase = "Odpowiedź C", answerDFromDataBase = "Odpowiedź D";
     private TextView question;
     private Button answerA, answerB, answerC, answerD, hint5050, hintAudience, hintPhone, backToMenu;
-
     private ArrayList<Button> answerButtons = new ArrayList<>();
-
     public GameButtons() throws IOException {
     }
 
@@ -50,9 +43,24 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         intent.putExtra("score", score);
         startActivity(intent);
     }
+
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.question);
+
+        // Pobieranie 'response' z bazy
+        DataBaseQuestion task = new DataBaseQuestion();
+        try {
+            String result = task.execute("http://10.0.2.2:8080/question?roundNumber=1").get();
+            questionFromDataBase = result;
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
 
         Intent intent = getIntent();
         questionLvl = intent.getIntExtra("questionLvl", 1); // pobranie przekazanej wartości 'questionLvl'
@@ -68,7 +76,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         hintPhone = findViewById(R.id.hintPhone);
         backToMenu = findViewById(R.id.backToMenuButton);
 
-        question.setText(questionFromDataBase + questionLvl);
+        question.setText(" Pytanie numer: "+ questionLvl +" "+ questionFromDataBase );
         answerA.setText(answerAFromDataBase);
         answerB.setText(answerBFromDataBase);
         answerC.setText(answerCFromDataBase);
