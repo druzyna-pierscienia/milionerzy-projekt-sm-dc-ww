@@ -2,7 +2,6 @@ package com.example.milionerzy;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,7 +31,7 @@ public class Scoreboard extends AppCompatActivity {
 
 
         // Pobieranie 'response' z bazy
-        DataBaseQuestion task = new DataBaseQuestion();
+        ApiRequest task = new ApiRequest();
         try {
             pos1 = findViewById(R.id.position1);
             pos2 = findViewById(R.id.position2);

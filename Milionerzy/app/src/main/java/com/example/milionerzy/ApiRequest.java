@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class DataBaseQuestion extends AsyncTask<String, Void, String> {
+public class ApiRequest extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... urls){

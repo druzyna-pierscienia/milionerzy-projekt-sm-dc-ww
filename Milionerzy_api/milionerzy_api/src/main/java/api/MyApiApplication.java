@@ -29,7 +29,7 @@ public class MyApiApplication {
                 // Tworzenie zapytania SQL
                 String query = "SELECT * FROM milionerzy.pytania WHERE numer_rundy = "+roundNumber;
                 Random random = new Random();
-                int randomNumber = random.nextInt(10);
+                int randomNumber = random.nextInt(9);
                 // Wykonanie zapytania
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
@@ -97,8 +97,8 @@ public class MyApiApplication {
     }
 
     @GetMapping("/login")
-    public boolean checkLogin(@RequestParam(name = "login") String login, @RequestParam(name = "password") String password){
-        boolean logSucces = false;
+    public String checkLogin(@RequestParam(name = "login") String login, @RequestParam(name = "password") String password){
+        String logSucces = "false";
         int count = 0;
         Connect connect = new Connect();
         Connection connection = connect.getConnection();
@@ -122,7 +122,7 @@ public class MyApiApplication {
                     count++;
                 }
                 if(count>0){
-                    logSucces=true;
+                    logSucces="true";
                 }
                 // Zamknięcie obiektów ResultSet i Statement
                 resultSet.close();
@@ -139,8 +139,8 @@ public class MyApiApplication {
     }
 
     @PostMapping("/register")
-    public int addUser(@RequestParam(name = "login") String login, @RequestParam(name = "password") String password, @RequestParam(name = "mail") String mail) {
-        int success = 0;
+    public String addUser(@RequestParam(name = "login") String login, @RequestParam(name = "password") String password, @RequestParam(name = "mail") String mail) {
+        String success = "0";
         int count = 0;
         Connect connect = new Connect();
         Connection connection = connect.getConnection();
@@ -165,7 +165,7 @@ public class MyApiApplication {
                     count++;
                 }
                 if(count!=0){
-                    success=69;
+                    success="69";
                 }else {
 
                     // Utworzenie zapytania SQL
@@ -181,7 +181,7 @@ public class MyApiApplication {
                     int rowsAffected = statement2.executeUpdate();
 
                     if (rowsAffected == 1) { // Jeżeli wstawiono dokładnie jeden wiersz
-                        success = 420;
+                        success = "420";
                         connection.commit(); // zatwierdzenie tranzakcji
                     } else {
                         connection.rollback(); // wycofanie tranzakcji
