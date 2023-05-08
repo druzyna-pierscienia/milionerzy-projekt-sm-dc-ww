@@ -9,8 +9,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -19,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button registerButton, loginButton;
     private TextInputEditText login, password;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +31,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         registerButton = findViewById(R.id.register_button);
         loginButton = findViewById(R.id.login_button);
 
+
         registerButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
+
+
     };
 
     @Override
@@ -66,8 +73,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+                break;
+
 
         }
+
     }
 
     private void alertIncorrectData() {

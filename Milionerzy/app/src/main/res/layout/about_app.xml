@@ -29,4 +29,35 @@
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewAbout"
+        android:layout_width="300dp"
+        android:layout_height="232dp"
+        android:layout_marginTop="40dp"
+        android:text="Aplikacja ma być grą która posiada 10 etapów. Na każdym z etapów mają
+pojawiać się 4 pytania z których tylko jedna jest prawidłowa, dodatkowo każde pytanie ma
+limit czasu na odpowiedź \nMożna skorzystać z 3 kół ratunkowych: \n- 50/50
+\n- Pytanie do publicznośc \n- Telefon do przyjaciela"
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Autorzy \nDamian Ciura \nStanisław Mendel \nWiktor warmuz "
+        android:textColor="@color/white"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.202"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAbout" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
