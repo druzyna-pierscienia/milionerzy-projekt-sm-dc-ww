@@ -204,4 +204,52 @@ public class MyApiApplication {
         }
         return success;
     }
+    @PostMapping("/saveScore")
+    public String saveScore(@RequestParam(name = "login") String login, @RequestParam(name = "score") String score){
+        String success = "0";
+        int count = 0;
+        Connect connect = new Connect();
+        Connection connection = connect.getConnection();
+        if (connection != null) {
+            try {
+                connection.setAutoCommit(false); // włączenie ręcznego zarządzania transakcjami
+
+
+
+
+                // Utworzenie zapytania SQL
+                String query = "INSERT INTO milionerzy.tabilca_wynikow (uzytkownik,wynik) VALUES((SELECT id_uzytkownika FROM milionerzy.uzytkownicy WHERE login = ?),?)";
+
+                // Przygotowanie instrukcji SQL z parametrami
+                PreparedStatement statement2 = connection.prepareStatement(query);
+                statement2.setString(1, login);
+                statement2.setInt(2, Integer.parseInt(score));
+
+                // Wykonanie instrukcji SQL
+                int rowsAffected = statement2.executeUpdate();
+
+                if (rowsAffected == 1) { // Jeżeli wstawiono dokładnie jeden wiersz
+                    success = "420";
+                    connection.commit(); // zatwierdzenie tranzakcji
+                } else {
+                    connection.rollback(); // wycofanie tranzakcji
+                }
+
+                // Zamknięcie obiektów Statement i Connection
+
+                statement2.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                try {
+                    connection.rollback(); // wycofanie tranzakcji w przypadku błędu SQL
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            } finally {
+                connect.close(); // zamknięcie połączenia z bazą danych
+            }
+        }
+        return success;
+    }
 }
