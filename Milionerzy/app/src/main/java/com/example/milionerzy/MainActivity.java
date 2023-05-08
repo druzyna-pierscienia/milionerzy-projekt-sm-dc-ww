@@ -67,22 +67,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     throw new RuntimeException(e);
                 }
 
-
-
-
-
-                //TODO:Warunek sprawdzający czy zalogowano
-
-
         }
     }
 
     private void alertIncorrectData() {
 
-
-
-
-        // Wyświetl okno dialogowe z alertem o nieprawidłowych danychlogowania
+        // Wyświetl okno dialogowe z alertem o nieprawidłowych danych logowania
         String message = "Incorect pasword or login";
         new AlertDialog.Builder(this)
                 .setMessage(message)
