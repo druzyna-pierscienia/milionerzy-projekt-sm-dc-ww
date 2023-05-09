@@ -74,7 +74,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
             }
             else {
                 String[] quest = result.split("/");
-                questionFromDataBase = quest[0] + " " + quest[5];
+                questionFromDataBase = quest[0]; //+ " " + quest[5];
                 answerAFromDataBase = quest[1];
                 answerBFromDataBase = quest[2];
                 answerCFromDataBase = quest[3];
@@ -98,7 +98,8 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         hintPhone = findViewById(R.id.hintPhone);
         backToMenu = findViewById(R.id.backToMenuButton);
 
-        question.setText(" Pytanie numer: "+ questionLvl +" "+ questionFromDataBase );
+        //question.setText(" Pytanie numer: "+ questionLvl +" "+ questionFromDataBase );
+        question.setText(questionFromDataBase);
         answerA.setText(answerAFromDataBase);
         answerB.setText(answerBFromDataBase);
         answerC.setText(answerCFromDataBase);
