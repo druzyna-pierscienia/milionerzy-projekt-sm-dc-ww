@@ -67,39 +67,39 @@ public class Scoreboard extends AppCompatActivity {
                 tmp = ranking[0].split("/");
                 pos1.setText(tmp[0] + "    -    " + tmp[1]);
                 }
-                if(ranking.length==2) {
+                if(ranking.length>=2) {
                 tmp = ranking[1].split("/");
                 pos2.setText(tmp[0] + "    -    " + tmp[1]);
             }
-            if(ranking.length==3) {
+            if(ranking.length>=3) {
                 tmp = ranking[2].split("/");
                 pos3.setText(tmp[0] + "    -    " + tmp[1]);
             }
-            if(ranking.length==4) {
+            if(ranking.length>=4) {
                 tmp = ranking[3].split("/");
                 pos4.setText(tmp[0] + "    -    " + tmp[1]);
             }
-            if(ranking.length==5) {
+            if(ranking.length>=5) {
                 tmp = ranking[4].split("/");
                 pos5.setText(tmp[0] + "    -    " + tmp[1]);
             }
-            if(ranking.length==6) {
+            if(ranking.length>=6) {
                 tmp = ranking[5].split("/");
                 pos6.setText(tmp[0] + "    -    " + tmp[1]);
             }
-            if(ranking.length==7) {
+            if(ranking.length>=7) {
                 tmp = ranking[6].split("/");
                 pos7.setText(tmp[0] + "    -    " + tmp[1]);
             }
-            if(ranking.length==8) {
+            if(ranking.length>=8) {
                 tmp = ranking[7].split("/");
                 pos8.setText(tmp[0] + "    -    " + tmp[1]);
             }
-            if(ranking.length==9) {
+            if(ranking.length>=9) {
                 tmp = ranking[8].split("/");
                 pos9.setText(tmp[0] + "    -    " + tmp[1]);
             }
-            if(ranking.length==10) {
+            if(ranking.length>=10) {
                 tmp = ranking[9].split("/");
                 pos10.setText(tmp[0] + "    -    " + tmp[1]);
             }
