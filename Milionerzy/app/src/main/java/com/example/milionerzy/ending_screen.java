@@ -37,7 +37,7 @@ public class ending_screen extends AppCompatActivity {
 
         ApiRequestInto task = new ApiRequestInto();
         try {
-            String result = task.execute("http://localhost:8080/saveScore?login="+username+"&score="+Integer.toString(score)).get();
+            String result = task.execute("http://10.0.2.2:8080/saveScore?login="+username+"&score="+Integer.toString(score)).get();
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
         } catch (InterruptedException e) {
