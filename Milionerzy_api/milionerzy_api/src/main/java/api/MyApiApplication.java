@@ -69,7 +69,7 @@ public class MyApiApplication {
         if (connection != null) {
             try {
                 // Tworzenie zapytania SQL
-                String query = "SELECT tabilca_wynikow.wynik, uzytkownicy.login FROM milionerzy.tabilca_wynikow INNER JOIN milionerzy.uzytkownicy ON tabilca_wynikow.uzytkownik=uzytkownicy.id_uzytkownika ORDER BY wynik LIMIT 10";
+                String query = "SELECT tabilca_wynikow.wynik, uzytkownicy.login FROM milionerzy.tabilca_wynikow INNER JOIN milionerzy.uzytkownicy ON tabilca_wynikow.uzytkownik=uzytkownicy.id_uzytkownika ORDER BY wynik DESC LIMIT 10";
 
                 // Wykonanie zapytania
                 Statement statement = connection.createStatement();
