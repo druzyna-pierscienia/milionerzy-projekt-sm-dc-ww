@@ -29,7 +29,8 @@ public class MyApiApplication {
                 // Tworzenie zapytania SQL
                 String query = "SELECT * FROM milionerzy.pytania WHERE numer_rundy = "+roundNumber;
                 Random random = new Random();
-                int randomNumber = random.nextInt(9);
+                int randomNumber = random.nextInt(10)+1;
+                pytanie += randomNumber;
                 // Wykonanie zapytania
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
