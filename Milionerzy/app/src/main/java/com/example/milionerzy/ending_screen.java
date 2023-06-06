@@ -19,6 +19,7 @@ public class ending_screen extends AppCompatActivity {
 
         Intent intent = getIntent();
         int score = intent.getIntExtra("score", 0); // pobranie przekazanej wartości 'score'
+        int questionLvl = intent.getIntExtra("questionLvl", 0); // pobranie przekazanej wartości 'score'
         String question = intent.getStringExtra("question"); // pobranie przekazanego tekstu pytania
         String correctAnswer = intent.getStringExtra("correctAnswer"); // pobranie przekazanej poprawnej odpowiedzi
 
@@ -26,11 +27,16 @@ public class ending_screen extends AppCompatActivity {
         TextView scoreTextView = findViewById(R.id.final_score);
         TextView questionTV = findViewById(R.id.question);
         TextView correctAnswerTV = findViewById(R.id.correct_answer);
-
-        scoreTextView.setText("Twój wynik: " + score);
-        questionTV.setText("Pytanie: " + question);
-        correctAnswerTV.setText("Poprawna odpowiedź: " + correctAnswer);
-
+        if(questionLvl < 10) {
+            scoreTextView.setText("Twój wynik: " + score);
+            questionTV.setText("Pytanie: " + question);
+            correctAnswerTV.setText("Poprawna odpowiedź: " + correctAnswer);
+        }
+        else {
+            scoreTextView.setText("Twój końcowy wynik to: " + score);
+            questionTV.setText(" ");
+            correctAnswerTV.setText(" ");
+        }
         //Wyślij do bazy danych wynik
         SharedPreferences sharedPreferences = getSharedPreferences("username", Context.MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "domyślna_wartość");

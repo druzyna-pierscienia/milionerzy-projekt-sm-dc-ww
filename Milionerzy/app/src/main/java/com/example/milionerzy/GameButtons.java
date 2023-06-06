@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutionException;
 
 public class GameButtons extends AppCompatActivity implements View.OnClickListener {
 
-    public Integer score=0, questionLvl=1, hint5050Use = 0, hintAudienceUse = 0, hintPhoneUse = 0;
+    public Integer score=0,scoreGuaranteed=0, questionLvl=1, hint5050Use = 0, hintAudienceUse = 0, hintPhoneUse = 0;
     private static final int ANSWERS_NUMBER = 4;
     private static final int HALF_ANSWERS_NUMBER = ANSWERS_NUMBER / 2;
 
@@ -41,16 +41,28 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
 
     private void correct_function(){
         score = score + (questionLvl * 10);
+        if(questionLvl%3 == 0){
+            scoreGuaranteed = score;
+        }
         questionLvl += 1;
 
-        Intent intent = new Intent(GameButtons.this, GameButtons.class);
-        intent.putExtra("questionLvl", questionLvl);
-        intent.putExtra("score", score);
-        intent.putExtra("hint5050Use",hint5050Use);
-        intent.putExtra("hintAudienceUse",hintAudienceUse);
-        intent.putExtra("hintPhoneUse",hintPhoneUse);
+        if(questionLvl <= 10) {
+            Intent intent = new Intent(GameButtons.this, GameButtons.class);
+            intent.putExtra("questionLvl", questionLvl);
+            intent.putExtra("score", score);
+            intent.putExtra("scoreGuaranteed", scoreGuaranteed);
+            intent.putExtra("hint5050Use", hint5050Use);
+            intent.putExtra("hintAudienceUse", hintAudienceUse);
+            intent.putExtra("hintPhoneUse", hintPhoneUse);
 
-        startActivity(intent);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(GameButtons.this, ending_screen.class);
+            intent.putExtra("questionLvl", questionLvl);
+            intent.putExtra("score", score);
+            startActivity(intent);
+        }
     }
 
     protected void onCreate(Bundle saveInstanceState) {
@@ -58,9 +70,11 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.question);
 
 
+
         Intent intent = getIntent();
         questionLvl = intent.getIntExtra("questionLvl", 1); // pobranie przekazanej wartości 'questionLvl'
         score = intent.getIntExtra("score", 0); // pobranie przekazanej wartości 'score'
+        scoreGuaranteed = intent.getIntExtra("scoreGuaranteed", 0); // pobranie przekazanej wartości 'scoreGuaranteed'
         hint5050Use = intent.getIntExtra("hint5050Use",0);
         hintAudienceUse = intent.getIntExtra("hintAudienceUse", 0);
         hintPhoneUse = intent.getIntExtra("hintPhoneUse", 0);
@@ -153,7 +167,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                         } else {
                             answerA.setBackgroundColor(getResources().getColor(R.color.red));
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
-                            intent.putExtra("score", score);
+                            intent.putExtra("score", scoreGuaranteed);
                             intent.putExtra("question", questionFromDataBase);
                             intent.putExtra("hint5050Use",hint5050Use);
                             intent.putExtra("hintAudienceUse",hintAudienceUse);
@@ -179,9 +193,6 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                                 intent.putExtra("correctAnswer", correctAnswerAway);
                             }
                             startActivity(intent);
-
-
-                            startActivity(intent);
                         }
                     }
                 }, 1000);
@@ -199,7 +210,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                         } else {
                             answerB.setBackgroundColor(getResources().getColor(R.color.red));
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
-                            intent.putExtra("score", score);
+                            intent.putExtra("score", scoreGuaranteed);
                             intent.putExtra("question", questionFromDataBase);
                             intent.putExtra("hint5050Use",hint5050Use);
                             intent.putExtra("hintAudienceUse",hintAudienceUse);
@@ -242,7 +253,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                         } else {
                             answerC.setBackgroundColor(getResources().getColor(R.color.red));
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
-                            intent.putExtra("score", score);
+                            intent.putExtra("score", scoreGuaranteed);
                             intent.putExtra("question", questionFromDataBase);
                             intent.putExtra("hint5050Use",hint5050Use);
                             intent.putExtra("hintAudienceUse",hintAudienceUse);
@@ -285,7 +296,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                         } else {
                             answerD.setBackgroundColor(getResources().getColor(R.color.red));
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
-                            intent.putExtra("score", score);
+                            intent.putExtra("score", scoreGuaranteed);
                             intent.putExtra("question", questionFromDataBase);
                             intent.putExtra("hint5050Use",hint5050Use);
                             intent.putExtra("hintAudienceUse",hintAudienceUse);
