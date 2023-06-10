@@ -356,67 +356,99 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
     }
 
     private void disableTwoIncorrectAnswers() {
-        ArrayList<Integer> incorrectIndexes = new ArrayList<>();
-        int correctIndex = -1;
-        for (int i = 0; i < ANSWERS_NUMBER; i++) {
-            Button button = answerButtons.get(i);
-            if (correctAnswer.equals(button.getTag())) {
-                correctIndex = i;
-            } else {
-                incorrectIndexes.add(i);
-            }
+        List<Button> wrongAnswers = new ArrayList<>();
+
+        if (correctAnswer.equals("a")) {
+            wrongAnswers.add(answerB);
+            wrongAnswers.add(answerC);
+            wrongAnswers.add(answerD);
+        } else if (correctAnswer.equals("b")) {
+            wrongAnswers.add(answerA);
+            wrongAnswers.add(answerC);
+            wrongAnswers.add(answerD);
+        } else if (correctAnswer.equals("c")) {
+            wrongAnswers.add(answerA);
+            wrongAnswers.add(answerB);
+            wrongAnswers.add(answerD);
+        } else {
+            wrongAnswers.add(answerA);
+            wrongAnswers.add(answerB);
+            wrongAnswers.add(answerC);
         }
 
-        Collections.shuffle(incorrectIndexes);
-        int disabledCount = 0;
-        for (int i = 0; i < incorrectIndexes.size(); i++) {
-            if (disabledCount >= HALF_ANSWERS_NUMBER) {
-                break;
-            }
-            int index = incorrectIndexes.get(i);
-            Button button = answerButtons.get(index);
-            if (button.isEnabled()) {
-                button.setEnabled(false);
-                disabledCount++;
-            }
-        }
+        Random random = new Random();
+        Button button1 = wrongAnswers.get(random.nextInt(wrongAnswers.size()));
+        wrongAnswers.remove(button1);
+        Button button2 = wrongAnswers.get(random.nextInt(wrongAnswers.size()));
+
+        button1.setEnabled(false);
+        button2.setEnabled(false);
+
         hint5050.setVisibility(View.INVISIBLE);
     }
     private void showAudienceDialog() {
+        // Sprawdzenie, czy koło "50/50" zostało już użyte
+        boolean is5050Used = !answerA.isEnabled() || !answerB.isEnabled() || !answerC.isEnabled() || !answerD.isEnabled();
+
         // Wylosuj procentowe szanse odpowiedzi
+        int chanceA, chanceB, chanceC, chanceD;
 
-
-        int chanceA = new Random().nextInt(41) + 50; // szansa na odpowiedź A to 50-90%
-        int chanceB = new Random().nextInt(100 - chanceA) + 1; // szansa na odpowiedź B to 1-80%
-        int chanceC = new Random().nextInt(100 - chanceA - chanceB) + 1; // szansa na odpowiedź C to 1-70%
-        int chanceD = 100 - chanceA - chanceB - chanceC; // szansa na odpowiedź D to reszta
-
-        // Wyświetl okno dialogowe z wynikami
-        if(correctAnswer.equals("a")){
-            String message = "Pytanie do publiczności:\nA: " + chanceA + "%\nB: " + chanceB + "%\nC: " + chanceC + "%\nD: " + chanceD + "%";
-            new AlertDialog.Builder(this)
-                    .setMessage(message)
-                    .setPositiveButton("OK", null)
-                    .show();
-        } else if(correctAnswer.equals("b")){
-            String message = "Pytanie do publiczności:\nA: " + chanceB + "%\nB: " + chanceA + "%\nC: " + chanceC + "%\nD: " + chanceD + "%";
-            new AlertDialog.Builder(this)
-                    .setMessage(message)
-                    .setPositiveButton("OK", null)
-                    .show();
-        } else if(correctAnswer.equals("c")){
-            String message = "Pytanie do publiczności:\nA: " + chanceC + "%\nB: " + chanceB + "%\nC: " + chanceA + "%\nD: " + chanceD + "%";
-            new AlertDialog.Builder(this)
-                    .setMessage(message)
-                    .setPositiveButton("OK", null)
-                    .show();
-        } else{
-            String message = "Pytanie do publiczności:\nA: " + chanceD + "%\nB: " + chanceB + "%\nC: " + chanceC + "%\nD: " + chanceA + "%";
-            new AlertDialog.Builder(this)
-                    .setMessage(message)
-                    .setPositiveButton("OK", null)
-                    .show();
+        if (is5050Used) {
+            // Koło "50/50" było już użyte, rozdziel procenty pomiędzy pozostałe dwie odpowiedzi
+            chanceA = new Random().nextInt(71) + 15; // szansa na odpowiedź A to 15-85%
+            chanceB = 100 - chanceA; // szansa na odpowiedź B to reszta
+            chanceC = 0;
+            chanceD = 0;
+        } else {
+            // Koło "50/50" jeszcze nie zostało użyte, losuj normalny rozkład procentowy
+            chanceA = new Random().nextInt(41) + 50; // szansa na odpowiedź A to 50-90%
+            chanceB = new Random().nextInt(100 - chanceA) + 1; // szansa na odpowiedź B to 1-80%
+            chanceC = new Random().nextInt(100 - chanceA - chanceB) + 1; // szansa na odpowiedź C to 1-70%
+            chanceD = 100 - chanceA - chanceB - chanceC; // szansa na odpowiedź D to reszta
         }
+
+        // Tworzenie wiadomości dla okna dialogowego
+        String message;
+        if (correctAnswer.equals("a") && !answerB.isEnabled() && !answerC.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceA + "%\nB: " + chanceD + "%\nC: " + chanceC + "%\nD: " + chanceB + "%";
+        } else if (correctAnswer.equals("a") && !answerB.isEnabled() && !answerD.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceA + "%\nB: " + chanceC + "%\nC: " + chanceB + "%\nD: " + chanceD + "%";
+        } else if (correctAnswer.equals("a") && !answerC.isEnabled() && !answerD.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceA + "%\nB: " + chanceC + "%\nC: " + chanceB + "%\nD: " + chanceD + "%";
+        } else if (correctAnswer.equals("b") && !answerA.isEnabled() && !answerD.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceC + "%\nB: " + chanceA + "%\nC: " + chanceB + "%\nD: " + chanceD + "%";
+        } else if (correctAnswer.equals("b") && !answerC.isEnabled() && !answerA.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceC + "%\nB: " + chanceA + "%\nC: " + chanceD + "%\nD: " + chanceB + "%";
+        } else if (correctAnswer.equals("b") && !answerC.isEnabled() && !answerD.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceB + "%\nB: " + chanceA + "%\nC: " + chanceC + "%\nD: " + chanceD + "%";
+        } else if (correctAnswer.equals("c") && !answerA.isEnabled() && !answerD.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceC + "%\nB: " + chanceB + "%\nC: " + chanceA + "%\nD: " + chanceD + "%";
+        } else if (correctAnswer.equals("c") && !answerB.isEnabled() && !answerA.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceC + "%\nB: " + chanceD + "%\nC: " + chanceA + "%\nD: " + chanceB + "%";
+        } else if (correctAnswer.equals("c") && !answerB.isEnabled() && !answerD.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceB + "%\nB: " + chanceC + "%\nC: " + chanceA + "%\nD: " + chanceD + "%";
+        } else if (correctAnswer.equals("d") && !answerA.isEnabled() && !answerB.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceC + "%\nB: " + chanceD + "%\nC: " + chanceB + "%\nD: " + chanceA + "%";
+        } else if (correctAnswer.equals("d") && !answerC.isEnabled() && !answerA.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceC + "%\nB: " + chanceB + "%\nC: " + chanceD + "%\nD: " + chanceA + "%";
+        } else if (correctAnswer.equals("d") && !answerB.isEnabled() && !answerC.isEnabled()) {
+            message = "Pytanie do publiczności:\nA: " + chanceB + "%\nB: " + chanceC + "%\nC: " + chanceD + "%\nD: " + chanceA + "%";
+        } else if (correctAnswer.equals("a")) {
+            message = "Pytanie do publiczności:\nA: " + chanceA + "%\nB: " + chanceB + "%\nC: " + chanceC + "%\nD: " + chanceD + "%";
+        } else if (correctAnswer.equals("b")) {
+            message = "Pytanie do publiczności:\nA: " + chanceB + "%\nB: " + chanceA + "%\nC: " + chanceC + "%\nD: " + chanceD + "%";
+        } else if (correctAnswer.equals("c")) {
+            message = "Pytanie do publiczności:\nA: " + chanceC + "%\nB: " + chanceB + "%\nC: " + chanceA + "%\nD: " + chanceD + "%";
+        } else {
+            message = "Pytanie do publiczności:\nA: " + chanceD + "%\nB: " + chanceB + "%\nC: " + chanceC + "%\nD: " + chanceA + "%";
+        }
+
+        // Wyświetlanie okna dialogowego
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Pytanie do publiczności");
+        builder.setMessage(message);
+        builder.setPositiveButton("OK", null);
+        builder.show();
 
 
 
