@@ -408,6 +408,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         }
 
         // Tworzenie wiadomości dla okna dialogowego
+        
         String message;
         if (correctAnswer.equals("a") && !answerB.isEnabled() && !answerC.isEnabled()) {
             message = "Pytanie do publiczności:\nA: " + chanceA + "%\nB: " + chanceD + "%\nC: " + chanceC + "%\nD: " + chanceB + "%";
