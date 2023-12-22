@@ -1,6 +1,7 @@
 package com.example.milionerzy;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -36,6 +37,12 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
     private ImageButton hintAudience;
     private ImageButton hintPhone;
     private Button backToMenu;
+
+    MediaPlayer correctSound;
+    MediaPlayer wrongSound;
+
+    MediaPlayer hintSound;
+
     private ArrayList<Button> answerButtons = new ArrayList<>();
     public GameButtons() throws IOException {
     }
@@ -79,6 +86,10 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         hint5050Use = intent.getIntExtra("hint5050Use",0);
         hintAudienceUse = intent.getIntExtra("hintAudienceUse", 0);
         hintPhoneUse = intent.getIntExtra("hintPhoneUse", 0);
+
+        correctSound = MediaPlayer.create(this, R.raw.correctsound);
+        wrongSound = MediaPlayer.create(this, R.raw.wrongsound);
+        hintSound = MediaPlayer.create(this, R.raw.hint);
 
         // Pobieranie 'response' z bazy
         ApiRequest task = new ApiRequest();
@@ -161,12 +172,14 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                     public void run() {
                         if (correctAnswer.equals("a")) {
                             answerA.setBackgroundColor(getResources().getColor(R.color.green));
+                            correctSound.start();
                             correct_function();
 
 
                             //TODO: Dodać warunek końca gry
                         } else {
                             answerA.setBackgroundColor(getResources().getColor(R.color.red));
+                            wrongSound.start();
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
                             intent.putExtra("score", scoreGuaranteed);
                             intent.putExtra("question", questionFromDataBase);
@@ -205,11 +218,13 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                     public void run() {
                         if (correctAnswer.equals("b")) {
                             answerB.setBackgroundColor(getResources().getColor(R.color.green));
+                            correctSound.start();
                             correct_function();
 
                             //TODO: Dodać warunek końca gry
                         } else {
                             answerB.setBackgroundColor(getResources().getColor(R.color.red));
+                            wrongSound.start();
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
                             intent.putExtra("score", scoreGuaranteed);
                             intent.putExtra("question", questionFromDataBase);
@@ -248,11 +263,13 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                     public void run() {
                         if (correctAnswer.equals("c")) {
                             answerC.setBackgroundColor(getResources().getColor(R.color.green));
+                            correctSound.start();
                             correct_function();
 
                             //TODO: Dodać warunek końca gry
                         } else {
                             answerC.setBackgroundColor(getResources().getColor(R.color.red));
+                            wrongSound.start();
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
                             intent.putExtra("score", scoreGuaranteed);
                             intent.putExtra("question", questionFromDataBase);
@@ -291,11 +308,13 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                     public void run() {
                         if (correctAnswer.equals("d")) {
                             answerD.setBackgroundColor(getResources().getColor(R.color.green));
+                            correctSound.start();
                             correct_function();
 
                             //TODO: Dodać warunek końca gry
                         } else {
                             answerD.setBackgroundColor(getResources().getColor(R.color.red));
+                            wrongSound.start();
                             Intent intent = new Intent(GameButtons.this, ending_screen.class);
                             intent.putExtra("score", scoreGuaranteed);
                             intent.putExtra("question", questionFromDataBase);
@@ -329,7 +348,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.hint5050:
                 // TODO: Koło ratunkowe - 50/50
-
+                hintSound.start();
                 // Disable 2 incorrect answers
                 disableTwoIncorrectAnswers();
                 // Disable 50/50 hint button after it's used
@@ -338,13 +357,13 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.hintAudience:
                 // TODO: Koło ratunkowe - pytanie do publiczności
-
+                hintSound.start();
                 showAudienceDialog();
                 hintAudienceUse += 1;
                 break;
             case R.id.hintPhone:
                 // TODO: Koło ratunkowe - pytanie do przyjaciela
-
+                hintSound.start();
                 usePhoneAFriend();
                 hintPhoneUse += 1;
 
@@ -409,7 +428,7 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
         }
 
         // Tworzenie wiadomości dla okna dialogowego
-        
+
         String message;
         if (correctAnswer.equals("a") && !answerB.isEnabled() && !answerC.isEnabled()) {
             message = "Pytanie do publiczności:\nA: " + chanceA + "%\nB: " + chanceD + "%\nC: " + chanceC + "%\nD: " + chanceB + "%";
@@ -459,10 +478,10 @@ public class GameButtons extends AppCompatActivity implements View.OnClickListen
 
     private void usePhoneAFriend() {
 
-    // Wylosuj procentową szansę na poprawną odpowiedź przy użyciu "telefonu do przyjaciela"
+        // Wylosuj procentową szansę na poprawną odpowiedź przy użyciu "telefonu do przyjaciela"
         boolean isAnswerCorrect = new Random().nextInt(100) < 75;
 
-    // Wyświetl odpowiedni komunikat w zależności od wyniku losowania
+        // Wyświetl odpowiedni komunikat w zależności od wyniku losowania
         String message;
         if (isAnswerCorrect) {
             message = "Twoj przyjaciel pomógl Ci, poprawna odpowiedź to: " + correctAnswer;

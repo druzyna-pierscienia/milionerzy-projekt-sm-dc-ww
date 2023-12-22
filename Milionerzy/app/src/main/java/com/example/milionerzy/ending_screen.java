@@ -3,6 +3,7 @@ package com.example.milionerzy;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,16 +24,24 @@ public class ending_screen extends AppCompatActivity {
         String question = intent.getStringExtra("question"); // pobranie przekazanego tekstu pytania
         String correctAnswer = intent.getStringExtra("correctAnswer"); // pobranie przekazanej poprawnej odpowiedzi
 
+        MediaPlayer winSound;
+        MediaPlayer loseSound;
 
         TextView scoreTextView = findViewById(R.id.final_score);
         TextView questionTV = findViewById(R.id.question);
         TextView correctAnswerTV = findViewById(R.id.correct_answer);
+
+        winSound = MediaPlayer.create(this, R.raw.win);
+        loseSound = MediaPlayer.create(this, R.raw.lose);
+
         if(questionLvl < 10) {
+            loseSound.start();
             scoreTextView.setText("Twój wynik: " + score);
             questionTV.setText("Pytanie: " + question);
             correctAnswerTV.setText("Poprawna odpowiedź: " + correctAnswer);
         }
         else {
+            winSound.start();
             scoreTextView.setText("Twój końcowy wynik to: " + score);
             questionTV.setText(" ");
             correctAnswerTV.setText(" ");
@@ -60,4 +69,4 @@ public class ending_screen extends AppCompatActivity {
         });
     }
 }
-    //String username = sharedPreferences.getString("username", "domyślna_wartość");
+//String username = sharedPreferences.getString("username", "domyślna_wartość");

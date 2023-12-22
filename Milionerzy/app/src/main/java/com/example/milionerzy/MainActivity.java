@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button registerButton, loginButton;
     private TextInputEditText login, password;
 
+    public static MediaPlayer music;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         registerButton = findViewById(R.id.register_button);
         loginButton = findViewById(R.id.login_button);
 
+        music = MediaPlayer.create(this, R.raw.music);
+        music.start();
 
         registerButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
